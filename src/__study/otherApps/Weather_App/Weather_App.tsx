@@ -7,7 +7,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 import WeatherBox from './component/WeatherBox';
 import WeatherButton from './component/WeatherButton';
-import { useEffectCustom } from '../model/customHook';
+import { useEffectCustom } from '../../../model/customHook';
 
 
 const API_Key:string = "asd"  //OpenWeather API Key

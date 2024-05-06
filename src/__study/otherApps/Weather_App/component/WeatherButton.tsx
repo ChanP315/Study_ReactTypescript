@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import {Button} from 'react-bootstrap';
 import {CurrentLocation} from '../model/weather_data'
-import { useEffectCustom } from '../../model/customHook';
 
 interface OwnProps {
   location?:CurrentLocation;

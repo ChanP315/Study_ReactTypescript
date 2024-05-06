@@ -1,0 +1,23 @@
+
+.box{
+    border:5px solid black;
+    width: 500px;
+}
+
+.Winbox{
+    border:5px solid green;
+    width: 500px;
+}
+.Losebox{
+    border:5px solid red;
+    width: 500px;
+}
+
+.item-img{
+    width: 400px;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+}

@@ -5,7 +5,9 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import RouterExample from './RouterExample_App/RouterExample_App';
+
+import { Practice_App } from './Practice_App/Practice_App';
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,7 +17,7 @@ root.render(
     //<App />
   //</React.StrictMode>
   <BrowserRouter>
-    <RouterExample />
+    <Practice_App />
   </BrowserRouter>
 );
 

@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react'
 import {JSON_OBJ} from '../model/model'
 import ProductCard_App from '../component/ProductCard_App';
 import { Container, Row, Col } from 'react-bootstrap';
+import { useSearchParams } from 'react-router-dom';
 
 const ProductAll_App:React.FC = () => {
 
   const [productList, setProductList] = useState<JSON_OBJ[]>([]);
+  const [query, setQuery] = useSearchParams();
 
-  const getProducts = async() => {
-    let url:string = `http://localhost:5000/products`;
+  const getProducts = async():Promise<void> => {
+
+    let searchQuery = query.get('q') || '';
+
+    let url:string = `http://localhost:5000/products?q=${searchQuery}`;
+    console.log("쿼리 값은?", url)
     let response:Response = await fetch(url);
     let data:JSON_OBJ[] = await response.json();
     setProductList(data);
@@ -16,7 +22,7 @@ const ProductAll_App:React.FC = () => {
 
   useEffect(():void => {
     getProducts();
-  },[])
+  },[query])
 
   return (
     <div>

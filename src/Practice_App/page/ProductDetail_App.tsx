@@ -8,6 +8,7 @@ const ProductDetail_App:React.FC = () => {
 
   let{id} = useParams<string>();
 
+
   const [product, setProduct] = useState<JSON_OBJ>();
 
   const getProductDetail = async():Promise<void> => {

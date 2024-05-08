@@ -31,7 +31,7 @@ const Navber_App:React.FC<OwnProps> = ({auth}) => {
       const target: EventTarget & HTMLInputElement = event.currentTarget; //트러블 2-2
       const value = target.value;
 
-      navigate(`/q=${value}`);
+      navigate(`/?q=${value}`);
     }
   }
 

@@ -3,7 +3,7 @@ import {Routes, Route} from 'react-router-dom'
 import Login_App from './page/Login_App';
 import ProductDetail_App from './page/ProductDetail_App';
 import PracticeAll_App from './page/ProductAll_App'
-import Navbar from './component/Navber_App'
+import Navbar_App from './component/Navber_App'
 import PrivateRoute_App from './route/PrivateRoute_App'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,7 +19,7 @@ export const Practice_App:React.FC = () => {
   return (
     <React.Fragment>
         <div>Practice_App</div>
-        <Navbar auth={authecticate}/>
+        <Navbar_App auth={authecticate} setAuthecticate={setAuthecticate}/>
         <Routes>
             <Route path="/" element={<PracticeAll_App/>}/>
             <Route path="/login" element={<Login_App setAuthecticate={setAuthecticate}/>}/>

@@ -9,7 +9,7 @@ import {useNavigate} from 'react-router-dom'
 const menuList:string[] = ["여성", "남성", "신생아/유아","아동", "Musinsa Home","Sale", "지속가능성"];
 
 interface OwnProps {
-  auth:boolean
+  auth:boolean;
 }
 
 

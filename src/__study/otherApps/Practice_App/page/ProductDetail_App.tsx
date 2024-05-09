@@ -12,7 +12,8 @@ const ProductDetail_App:React.FC = () => {
   const [product, setProduct] = useState<JSON_OBJ>();
 
   const getProductDetail = async():Promise<void> => {
-    const url:string = `http://localhost:5000/products/${id}`
+    const url:string = `http://localhost:4000/products/${id}`
+    // const url:string = `http://localhost:5000/products/${id}`
     const response:Response = await fetch(url);
     const data:JSON_OBJ = await response.json();
     console.log(data);

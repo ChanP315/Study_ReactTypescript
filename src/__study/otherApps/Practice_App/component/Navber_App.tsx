@@ -9,15 +9,21 @@ import {useNavigate} from 'react-router-dom'
 const menuList:string[] = ["여성", "남성", "신생아/유아","아동", "Musinsa Home","Sale", "지속가능성"];
 
 interface OwnProps {
-  auth:boolean
+  auth:boolean;
+  setAuthecticate:(bool:boolean) => void;
 }
 
 
-const Navber_App:React.FC<OwnProps> = ({auth}) => {
+const Navber_App:React.FC<OwnProps> = ({auth, setAuthecticate}) => {
 
   const navigate = useNavigate();
+
   const goToLogin = ():void => {
-    navigate("/login");
+    if(auth)
+    {
+      setAuthecticate(false);
+      navigate("/");
+    }else navigate("/login");
   }
 
   const goToHome = ():void => {
@@ -57,8 +63,6 @@ const Navber_App:React.FC<OwnProps> = ({auth}) => {
             <input type="text" onKeyDown={(event) => search(event)}/>
           </div>
         </div>
-
-        
     </React.Fragment>
     
   )

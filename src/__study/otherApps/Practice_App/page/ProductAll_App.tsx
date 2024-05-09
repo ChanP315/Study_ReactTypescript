@@ -13,7 +13,8 @@ const ProductAll_App:React.FC = () => {
 
     let searchQuery = query.get('q') || '';
 
-    let url:string = `http://localhost:5000/products?q=${searchQuery}`;
+    let url:string = `http://localhost:4000/products?q=${searchQuery}`;
+    // let url:string = `http://localhost:5000/products?q=${searchQuery}`;
     console.log("쿼리 값은?", url)
     let response:Response = await fetch(url);
     let data:JSON_OBJ[] = await response.json();

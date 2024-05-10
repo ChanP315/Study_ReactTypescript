@@ -4,7 +4,7 @@ import { JSON_OBJ } from '../model/model'
 import { Container, Row, Col, Button, Dropdown } from 'react-bootstrap';
 
 
-const ProductDetail_App:React.FC = () => {
+const ProductDetail_Page:React.FC = () => {
 
   let{id} = useParams<string>();
 
@@ -62,4 +62,4 @@ const ProductDetail_App:React.FC = () => {
   )
 }
 
-export default ProductDetail_App
+export default ProductDetail_Page

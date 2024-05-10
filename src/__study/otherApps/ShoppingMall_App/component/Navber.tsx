@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/Practice.css'
+import '../css/ShoppingMall.css'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +14,7 @@ interface OwnProps {
 }
 
 
-const Navber_App:React.FC<OwnProps> = ({auth, setAuthecticate}) => {
+const Navber:React.FC<OwnProps> = ({auth, setAuthecticate}) => {
 
   const navigate = useNavigate();
 
@@ -68,4 +68,4 @@ const Navber_App:React.FC<OwnProps> = ({auth, setAuthecticate}) => {
   )
 }
 
-export default Navber_App
+export default Navber

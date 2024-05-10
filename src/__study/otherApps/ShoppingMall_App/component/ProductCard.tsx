@@ -1,13 +1,13 @@
 import React from 'react'
 import { JSON_OBJ } from '../model/model'
-import '../css/Practice.css'
+import '../css/ShoppingMall.css'
 import { useNavigate } from 'react-router-dom'
 
 interface OwnProps {
     item?:JSON_OBJ
 }
 
-const ProductCard_App:React.FC<OwnProps> = ({item}) => {
+const ProductCard:React.FC<OwnProps> = ({item}) => {
 
   const navigate = useNavigate();
 
@@ -27,4 +27,4 @@ const ProductCard_App:React.FC<OwnProps> = ({item}) => {
   )
 }
 
-export default ProductCard_App
+export default ProductCard

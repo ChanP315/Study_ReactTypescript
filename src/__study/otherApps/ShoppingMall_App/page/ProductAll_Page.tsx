@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import {JSON_OBJ} from '../model/model'
-import ProductCard_App from '../component/ProductCard_App';
+import ProductCard from '../component/ProductCard';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 
-const ProductAll_App:React.FC = () => {
+const ProductAll_Page:React.FC = () => {
 
   const [productList, setProductList] = useState<JSON_OBJ[]>([]);
   const [query, setQuery] = useSearchParams();
@@ -31,7 +31,7 @@ const ProductAll_App:React.FC = () => {
         <Row>
           {productList.map((item) => (
             <Col lg={3}>
-              <ProductCard_App item={item}/>
+              <ProductCard item={item}/>
             </Col>
           ))}
         </Row>
@@ -40,4 +40,4 @@ const ProductAll_App:React.FC = () => {
   )
 }
 
-export default ProductAll_App
+export default ProductAll_Page

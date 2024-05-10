@@ -9,7 +9,7 @@ interface Ownprops {
   setAuthecticate:(bool:boolean) => void;
 }
 
-const Login_App:React.FC<Ownprops> = ({setAuthecticate}) => {
+const Login_Page:React.FC<Ownprops> = ({setAuthecticate}) => {
   const navigate = useNavigate();
 
   const loginUser = (event:React.FormEvent):void => {
@@ -45,4 +45,4 @@ const Login_App:React.FC<Ownprops> = ({setAuthecticate}) => {
   );
 }
 
-export default Login_App
+export default Login_Page

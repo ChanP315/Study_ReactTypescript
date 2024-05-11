@@ -1,5 +1,5 @@
 import { legacy_createStore as createStore } from 'redux';
-import rootReducer from './reducer_Modules/index';
+import rootReducer from './index';
 
 
 let store = createStore(rootReducer);

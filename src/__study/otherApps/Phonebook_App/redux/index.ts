@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
-import countReducer from './reducer_Modules/count';
-import statInfoReducer from './reducer_Modules/statInfo';
+import contactReducer from './Module/contact';
 
 const rootReducer = combineReducers({
-  countReducer,
-  statInfoReducer
+    contactReducer
 });
 
 // 루트 리듀서를 내보내주세요.

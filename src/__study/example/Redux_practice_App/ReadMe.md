@@ -2,3 +2,4 @@
  
  + redux : typescript version
  + useSeletor, useDispatch
+ + type, payload

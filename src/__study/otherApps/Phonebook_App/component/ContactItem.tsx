@@ -1,0 +1,29 @@
+import React from 'react';
+import {Row, Col} from 'react-bootstrap';
+
+import {contactStatus} from '../module/redux_module'
+
+interface OwnProps {
+    contact:contactStatus
+}
+
+const ContactItem:React.FC<OwnProps> = ({contact}) => {
+  return (
+    <Row>
+        <Col lg={2}>
+            <img width={50}
+            src = "data:image/png;base64,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"/>
+        </Col>
+        <Col lg={10}>
+            <div>
+                {contact.name}
+            </div>
+            <div>
+                {contact.phoneNumber}
+            </div>
+        </Col>
+    </Row>
+  )
+}
+
+export default ContactItem

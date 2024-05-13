@@ -6,10 +6,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
-import store from './__study/otherApps/ShoppingMall_Redux_App/redux/store';
 
-
-import { ShoppingMall_Redux_App } from './__study/otherApps/ShoppingMall_Redux_App/ShoppingMall_Redux_App';
+import store from './__study/otherApps/ShoppingMall_RTK_App/redux/store';
+import { ShoppingMall_RTK_App } from './__study/otherApps/ShoppingMall_RTK_App/ShoppingMall_RTK_App';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -19,7 +18,7 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         {/* <App /> */}
-        <ShoppingMall_Redux_App />
+        <ShoppingMall_RTK_App />
       </BrowserRouter>
     </Provider>
 // </React.StrictMode>

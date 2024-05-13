@@ -6,9 +6,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import { Provider } from 'react-redux';
-import store from './__study/otherApps/Phonebook_App/redux/store';
+import store from './__study/otherApps/ShoppingMall_Redux_App/redux/store';
 
-import Phonebook_App from './__study/otherApps/Phonebook_App/Phonebook_App';
+
+import { ShoppingMall_Redux_App } from './__study/otherApps/ShoppingMall_Redux_App/ShoppingMall_Redux_App';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
@@ -16,10 +17,10 @@ const root = ReactDOM.createRoot(
 root.render(
   // <React.StrictMode>
     <Provider store={store}>
-      {/* <BrowserRouter> */}
+      <BrowserRouter>
         {/* <App /> */}
-        <Phonebook_App/>
-      {/* </BrowserRouter> */}
+        <ShoppingMall_Redux_App />
+      </BrowserRouter>
     </Provider>
 // </React.StrictMode>
 );

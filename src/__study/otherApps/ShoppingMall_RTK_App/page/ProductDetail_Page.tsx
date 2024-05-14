@@ -15,7 +15,7 @@ const ProductDetail_Page:React.FC = () => {
 
   // const [product, setProduct] = useState<JSON_OBJ>();
   // const product = useSelector((state:RootState)=>state.product.productList[0]);
-  const product = useSelector((state:RootState)=>state.product.productList);
+  const product = useSelector((state:RootState)=>state.product.productList[0]);
 
   const getProductDetail = ():void => {
     dispatcher(productAction.getProductDetail(id));
@@ -29,17 +29,17 @@ const ProductDetail_Page:React.FC = () => {
     <Container>
       <Row>
         <Col className='product-img'>
-          {/* <img src={product?.img}/> */}
+          <img src={product?.img}/>
         </Col>
         <Col>
           <Row>
-            {/* {product?.title} */}
+            {product?.title}
           </Row>
           <Row>
-            {/* {product?.price} */}
+            {product?.price}
           </Row>
           <Row>
-            {/* {product?.choice? "choiceTrue":"ChiceFalse"} */}
+            {product?.choice? "choiceTrue":"ChiceFalse"}
           </Row>
           <Row>
           <Dropdown>
@@ -47,9 +47,9 @@ const ProductDetail_Page:React.FC = () => {
               사이즈 선택
             </Dropdown.Toggle>
             <Dropdown.Menu>
-              {/* {product?.size?.map((element, index)=> (
+              {product?.size?.map((element, index)=> (
                 <Dropdown.Item key={index} href="#/action-1">{element}</Dropdown.Item>
-              ))} */}
+              ))}
             </Dropdown.Menu>
           </Dropdown>
           </Row>

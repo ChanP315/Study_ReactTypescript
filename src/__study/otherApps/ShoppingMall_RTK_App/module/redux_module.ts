@@ -21,8 +21,10 @@ export type productStateArray = {
 
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS" as const;
 
-export interface loginState {
-    id: string;
-    pw: string;
+export interface userInfo {
+    id: string,
+    pw: string
+}
+export interface loginState extends userInfo {
     auth: boolean;
 }

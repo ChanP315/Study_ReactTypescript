@@ -12,7 +12,7 @@ import productReducer from './module/product';
 
 const store = configureStore({
     reducer: {
-        //login: loginReducer,
+        login: loginReducer,
         product: productReducer,
     }
 });

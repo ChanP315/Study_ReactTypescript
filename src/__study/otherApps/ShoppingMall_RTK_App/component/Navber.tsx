@@ -5,23 +5,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import {useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
+import { useDispatch } from 'react-redux';
+import { loginAction } from '../redux/actions/loginAction';
 
 const menuList:string[] = ["여성", "남성", "신생아/유아","아동", "Musinsa Home","Sale", "지속가능성"];
-
+/*
 interface OwnProps {
   auth:boolean;
   setAuthecticate:(bool:boolean) => void;
 }
+*/
 
-
-const Navber:React.FC<OwnProps> = ({auth, setAuthecticate}) => {
-
+//const Navber:React.FC<OwnProps> = ({auth, setAuthecticate}) => {
+const Navber:React.FC = () => {
   const navigate = useNavigate();
+  const auth = useSelector((state:RootState)=>state.login.auth);
+  const dispatcher = useDispatch();
 
   const goToLogin = ():void => {
     if(auth)
     {
-      setAuthecticate(false);
+      // setAuthecticate(false);
+      dispatcher(loginAction.logOut());
       navigate("/");
     }else navigate("/login");
   }

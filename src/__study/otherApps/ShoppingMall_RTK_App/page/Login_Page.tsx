@@ -7,11 +7,13 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginAction } from '../redux/actions/loginAction';
 
+/*
 interface Ownprops {
   setAuthecticate:(bool:boolean) => void;
 }
-
-const Login_Page:React.FC<Ownprops> = ({setAuthecticate}) => {
+*/
+// const Login_Page:React.FC<Ownprops> = ({setAuthecticate}) => {
+const Login_Page:React.FC = () => {
   const dispatcher = useDispatch();
   const navigate = useNavigate();
 
@@ -21,7 +23,7 @@ const Login_Page:React.FC<Ownprops> = ({setAuthecticate}) => {
   const loginUser = (event:React.FormEvent):void => {
     event.preventDefault();
     console.log("login!!!!!!!!!!succ!!!!!!!!!");
-    dispatcher(loginAction.login(id, pw));
+    dispatcher(loginAction.logIn(id, pw));
     navigate('/');
   }
 

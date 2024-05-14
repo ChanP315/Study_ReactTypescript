@@ -32,30 +32,96 @@ const productReducer = (state:productStateArray = initProduct, action:productAct
 
 export default productReducer;
 */
-
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, SerializedError, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { customError } from "../../module/module";
 
 const _initialState: productStateArray = ({
-    productList: []
+    productList: [],
+    isLoading: false,
+    error: ''
 })
 
 const initProduct: productStateArray = {
-    productList: []
+    productList: [],
+    isLoading: false,
+    error: ''
 }
+
+// export const getProduct = createAsyncThunk<productState[], string,{rejectValue:string}>('product/fetchAll',async(searchQuery, {rejectWithValue})=> {
+export const fatchProduct = createAsyncThunk<productState[], string,{rejectValue:string}>('product/fetchAll',async(searchQuery, {rejectWithValue})=> {
+    try{
+        const url:string = `http://localhost:4000/products?q=${searchQuery}`;
+        // let url:string = `http://localhost:5000/products?q=${searchQuery}`;
+        console.log("쿼리 값은?", url)
+        const response:Response = await fetch(url);
+        //let data:productState[] = await response.json();
+        //throw new Error("너무 힘들었다...")
+        return await response.json() as productState[];
+    }catch(error:unknown)
+    {
+        const customE = error as customError;
+        //return customE.message;
+        console.log(customE.message);
+        return rejectWithValue(customE.message);
+    }
+});
+
+export const fatchProductDetail = createAsyncThunk<productState, string|undefined,{rejectValue:string}>('product/fetchDetail',async(id, {rejectWithValue})=> {
+    try{
+        const url:string = `http://localhost:4000/products/${id}`;
+        // const url:string = `http://localhost:5000/products/${id}`
+        const response:Response = await fetch(url);
+        // const data:productState = await response.json();
+        return await response.json() as productState;
+    }catch(e){
+        const customE = e as customError;
+        //return customE.message;
+        console.log(customE.message);
+        return rejectWithValue(customE.message);
+    }
+});
 
 export const productSlice = createSlice({
     name: 'product',
     initialState: initProduct,
     reducers: {
-        getProductSuccess: (state, action: PayloadAction<productState[]>) => {
-            console.log("getproduct :", action.payload);
-            state.productList = action.payload;
-        },
+        // Redux-toolkit studying ver 2 : createAsyncThunk()
+        // getProductSuccess: (state, action: PayloadAction<productState[]>) => {
+        //     console.log("getproduct :", action.payload);
+        //     state.productList = action.payload;
+        // },
         get_ProductDetailSuccess: (state, action: PayloadAction<productState>) => {
             console.log("getproduct :", action.payload);
             state.productList = [action.payload];
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fatchProduct.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(fatchProduct.fulfilled, (state, action: PayloadAction<productState[]>) => {
+            state.isLoading = false;
+            state.productList = action.payload;
+        });
+        builder.addCase(fatchProduct.rejected, (state, action: PayloadAction<string | undefined>) => {
+            console.log(action.payload);
+            state.isLoading = false;
+            state.error = action.payload || 'Unknown error occurred';
+        });
+
+        builder.addCase(fatchProductDetail.pending, (state) => {
+            state.isLoading = true;
+        });
+        builder.addCase(fatchProductDetail.fulfilled, (state, action: PayloadAction<productState>) => {
+            state.isLoading = false;
+            state.productList = [action.payload];
+        });
+        builder.addCase(fatchProductDetail.rejected, (state, action: PayloadAction<string | undefined>) => {
+            console.log(action.payload);
+            state.isLoading = false;
+            state.error = action.payload || 'Unknown error occurred';
+        });
     },
 })
 

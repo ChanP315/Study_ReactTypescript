@@ -7,3 +7,11 @@ export type JSON_OBJ = {
     new:boolean,
     size:string[]
 }
+
+export interface customError extends Error {
+    response?: {
+        data: any;
+        status: number;
+        headers: string;
+    }
+}

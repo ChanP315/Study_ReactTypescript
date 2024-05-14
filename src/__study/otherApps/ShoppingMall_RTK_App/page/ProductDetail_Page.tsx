@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import { useDispatch } from 'react-redux';
 import { productAction } from '../redux/actions/productAction';
+import { fatchProductDetail } from '../redux/module/product';
 
 
 const ProductDetail_Page:React.FC = () => {
@@ -18,7 +19,7 @@ const ProductDetail_Page:React.FC = () => {
   const product = useSelector((state:RootState)=>state.product.productList[0]);
 
   const getProductDetail = ():void => {
-    dispatcher(productAction.getProductDetail(id));
+    dispatcher<any>(fatchProductDetail(id));
   }
 
   useEffect(()=>{

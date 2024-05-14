@@ -12,7 +12,9 @@ export interface productState {
 }
 
 export type productStateArray = {
-    productList: productState[]
+    productList: productState[];
+    isLoading: boolean;
+    error: string | undefined
 }
 
 

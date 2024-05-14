@@ -3,12 +3,9 @@ import ProductCard from '../component/ProductCard';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 
-import {productAction} from '../redux/actions/productAction';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
-import { productState } from '../module/redux_module';
-import { selectProductList } from '../redux/module/product';
+import { selectProductList, fatchProduct } from '../redux/module/product';
 
 const ProductAll_Page:React.FC = () => {
 
@@ -21,7 +18,7 @@ const ProductAll_Page:React.FC = () => {
   const getProducts = ():void => {
     let searchQuery = query.get('q') || '';
 
-    dispatcher(productAction.getProducts(searchQuery));
+    dispatcher<any>(fatchProduct(searchQuery));
   }
 
   useEffect(():void => {

@@ -13,3 +13,14 @@
                   state.productList = [action.payload];
                }
             }
+
+
+ + Redux-toolkit studying ver 2
+     + project: ShoppingMall_RTK_App Ver 2
+     + create customError Type (ex. tryCatch에서 사용)
+
+     + createAsyncThunk()
+         + extraReducers(builder) 추가
+             + addCase를 통해 pending, fulfilled, rejected 케이스 구현가능.
+         + tryCatch문에서 createAsyncThunk함수의 타입을 아주 정확하게 상시해야 에러문 반환 가능.
+         

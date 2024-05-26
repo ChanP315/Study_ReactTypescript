@@ -13,6 +13,7 @@ import indexRouter from './routes/index.js';
 const app = express();
 const MONGODB_URI_PROD = process.env.MONGODB_URI_PROD;
 console.log('PCY mongo uri: ', MONGODB_URI_PROD);
+console.log('PCY mongo port: ', process.env.PORT);
 app.use(bodyParser.json());
 app.use(cors());
 app.use('/api', indexRouter);
@@ -29,6 +30,6 @@ mongoose.connect(mongoURI, {useNewUrlParser: true}).then(()=> {
 
 
 
-app.listen(process.env.PORT || 4000, () => {
+app.listen(process.env.PORT || 4000, () => { //.env.POT
     console.log("server on Port Num : 4000");
 });

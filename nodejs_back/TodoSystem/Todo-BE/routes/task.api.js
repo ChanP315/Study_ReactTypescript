@@ -1,7 +1,7 @@
 // const express = require('express');
 import express from 'express';
 
-import taskConroller from '../controller/task.controller.js'
+import taskConroller from '../apiController/task.controller.js'
 
 const router = express.Router();
 

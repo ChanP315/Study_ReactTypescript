@@ -1,3 +1,5 @@
+todo-fe-login-student directory는 강의 git clone 한 것.
+
 @@Todo - BE@@
 //할일앱 만들기 1~8 작업 완료
 /* 할일앱 만들기
@@ -62,6 +64,7 @@ package.json + Procfile: add(web: npm start)
 */
 
 npm install bcrypt; //password 암호화
+npm install bcryptjs; //password 암호화
 
 
 //로그인 만들기2 - 로그인 만들기 BE
@@ -118,3 +121,40 @@ res.send가 return 역할을 하는 것처럼 보이지만 실상 return과 같�
 2. 기능만들기 : CRUD
 3. 테스트
 */
+
+/* 로그인 만들기 5 - 로그인 FE
+1. 유저는 로그인을 할 수 있다.
+2. 로그인이 실패한 경우 에러메세지를 로그인창 상단에 보여준다.
+3. 로그인 성공할 경우 유저정보를 state에 저장한다.
+4. 로그인이 성공한 경우 토큰값을 session storage에 저장한다
+5. 로그인이 성공한 경우 api 헤더에 토큰값을 디폴트로 설정해둔다.
+6. 로그인이 성공한 경우 할일페이지 /로 넘어간다
+*/
+
+
+Local Storage vs Session Storage🤼‍♂️
+둘다 웹 브라우저가 제공하는 데이터 저장소이다.🛢 보통 약 5 MB정도의 데이터를 저장할 수 있고 자바스크립트로 직접 접근해 데이터를 저장, 읽기,제거(getItem,setItem,removeItem)를 할 수 있다.
+단 둘의 차이가 있다면 데이터 저장 유지 기간이다.
+
+Local storage👴: 영구적 데이터 저장소, 사용자가 일부러 브라우저 정보를 삭제하지 않는 이상 계속 유지가 된다. 특정도메인에서 저장한 데이터는 다른 도메인과 공유하지 않는다.
+session storage🎈: 세션이 유지되는 동안에만 유요한 저장소 (여기서 세션 유지란, 브라우저가 닫히거나 종료되는 것) 같은 도메인내에 모든 페이지에서 데이터 공유함.
+따라서 토큰값을 session storage에 저장을 하면 브라우저가 닫히는 순간 토큰이 날라가게되서 새로운 창을 열면 다시 로그인을 해야한다. 이와같은 단점을 보안하기위해 refresh token이라는 개념이 있다.♻ refresh token은 로컬스토리지에 저장을해서 브라우저가 닫히더라고 이 refresh token을 이용해 다시 로그인 필요없이 토큰을 재발행 할 수 있는 로직이다. 이로직은 이 코스에서 다루진 않지만 관심있는 친구들이라면 한번 공부해보는 것을 추천한다!
+
+
+Bearer 🕵️‍♂️🎫
+Bearer은 토큰의 유형을 식별하는 문자열이다. 토큰을 발행하고인증하는 방식은 다양한데 그중에서 Oauth2.0방식을 사용하는 jwt의 경우 해당토큰이 oauth2.0 bearer토큰 인증 방식 이라는 걸 사용한다는걸 표기해주기위해 Bearer을 앞에 붙인다.
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+nodejs_back/TodoSystem/Todo_FE/public/_redirects
+  - /api/* http://<notion/문서/AWS(아마존)-12개월/Todo-Study의 주소>/api/:splat 200
+
+nodejs_back/TodoSystem/Todo_FE/.env
+  - REACT_APP_BACKEND_URI=http://localhost:4000
+  - REACT_APP_BACKEND_PROXY=https://<netlify에 배포되어있는 Todo domain>
+
+nodejs_back/TodoSystem/Todo-BE/.env
+  - MONGODB_URI_PROD=<notion/문서/mongoDB site 에 있음. 계정과 비밀번호가 같음.>/todo-student
+  - JWT_SECRET_KEY=pcy

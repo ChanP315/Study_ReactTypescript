@@ -1,5 +1,5 @@
 import User from './model/User.js';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 const saltRounds = 10;
 
@@ -15,7 +15,7 @@ userController.createUser = async(req, res) => {
 
         if(user)
         {
-            throw new Error('이미 가입이 된 유저입니다.');
+            throw new Error('이미 가입이 된 이메일입니다.');
         }
         
         const salt = bcrypt.genSaltSync(saltRounds);
@@ -33,7 +33,7 @@ userController.createUser = async(req, res) => {
     }catch(error)
     {
         console.log(error);
-        res.status(400).json({status:"create Fail", error: error});
+        res.status(400).json({status:"create Fail", message: error.message});
     }
 }
 
@@ -61,7 +61,7 @@ userController.loginWithEmail = async(req, res) => {
     }catch(error)
     {
         console.log(error);
-        res.status(400).json({status: "loginWithEmail Fail", error: error});
+        res.status(400).json({status: "loginWithEmail Fail", message: error.message});
     }
 }
 

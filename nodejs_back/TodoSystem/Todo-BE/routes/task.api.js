@@ -1,16 +1,17 @@
 // const express = require('express');
 import express from 'express';
 
-import taskConroller from '../apiController/task.controller.js'
+import taskController from '../apiController/task.controller.js'
+import authController from '../apiController/auth.controller.js'
 
 const router = express.Router();
 
-router.post('/', taskConroller.createTask);
+router.post('/', authController.authenticate, taskController.createTask);
 
-router.get('/', taskConroller.getTask);
+router.get('/', taskController.getTask);
 
-router.put('/:id', taskConroller.updateTask);
+router.put('/:id', taskController.updateTask);
 
-router.delete('/:id', taskConroller.deleteTask);
+router.delete('/:id', taskController.deleteTask);
 
 export default router;

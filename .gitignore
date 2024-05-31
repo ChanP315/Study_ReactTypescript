@@ -2,6 +2,8 @@
 /nodejs_back/TodoSystem/Todo-BE/.env
 /nodejs_back/Shopping-Mall-System/BackEnd/node_modules
 /nodejs_back/Shopping-Mall-System/BackEnd/.env
+/nodejs_back/Shopping-Mall-System/FrontEnd/node_modules
+/nodejs_back/Shopping-Mall-System/FrontEnd/.env
 
 /node_modules
 .env

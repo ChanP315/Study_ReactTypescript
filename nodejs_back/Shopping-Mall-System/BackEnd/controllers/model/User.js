@@ -1,4 +1,8 @@
 import mongoose from "mongoose";
+import jwt from 'jsonwebtoken';
+import 'dotenv/config';
+
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 const Schema = mongoose.Schema;
 
@@ -21,6 +25,12 @@ userSchema.methods.toJSON = function () {
     delete obj.createAt;
 
     return obj;
+}
+
+userSchema.methods.generateToken = async function() {
+    const token = await jwt.sign({_id: this.id}, JWT_SECRET_KEY, {expiresIn:"1d"});
+
+    return token;
 }
 
 

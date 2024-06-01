@@ -24,6 +24,7 @@ userController.createUser = async(req, res) => {
         return res.status(200).json({status: "create Success"});
     }catch(err)
     {
+        console.log("User! createUser Fail");
         res.status(400).json({status: "create Fail", error: err.message});
     }
 }

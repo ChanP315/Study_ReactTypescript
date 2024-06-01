@@ -9,9 +9,9 @@ const productSchema = Schema({
     category: { type: Array,  required: true, },
     description: { type: String,  required: true, },
     price: { type: Number,  required: true, },
-    sotck: { type: Object,  required: true, },
+    stock: { type: Object,  required: true, },
     status: { type: String,  default: "active", },
-    isDeleted: { type: Boolean,  required: true, },
+    isDeleted: { type: Boolean },
 },{timestamps: true});
 
 productSchema.methods.toJSON = function () {

@@ -8,3 +8,10 @@ npm install express mongoose dotenv body-parser cors jsonwebtoken bcryptjs nodem
         option_settings:
             aws:elasticbeanstalk:environment:proxy:staticfiles:
                 "/api/*": "http://localhost:3000"
+
+
+BackEnd.zip --version descript -배포 성공한 버전만 기재
+    v1.0.1: 쇼핑몰 만들기 5~6
+    v1.1.0: 쇼핑몰 만들기 7~8
+    v1.2.0: 쇼핑몰 만들기 9~11
+    v1.3.0: 쇼핑몰 만들기 12~13

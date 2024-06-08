@@ -1,3 +1,6 @@
+/nodejs_back/.DS_Store
+/nodejs_back/Shopping-Mall-System/.DS_Store
+/nodejs_back/Shopping-Mall-System/BackEnd/.DS_Store
 /nodejs_back/TodoSystem/Todo-BE/node_modules
 /nodejs_back/TodoSystem/Todo-BE/.env
 /nodejs_back/Shopping-Mall-System/BackEnd/node_modules
@@ -7,3 +10,4 @@
 
 /node_modules
 .env
+.DS_Store

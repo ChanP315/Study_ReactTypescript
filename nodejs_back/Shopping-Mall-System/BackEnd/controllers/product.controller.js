@@ -20,12 +20,12 @@ productController.createProduct = async(req, res) => {
     }
 }
 
-productController.getProducts = async(req, res) => {
+productController.getProductList = async(req, res) => {
     try
     {
         const {page, name} = req.query;
         //const products = await Product.find({name: {$regex: name, $options:"i"}});
-        const condition = name  ? {name: {$regex: name, $options: "i"}} : {};
+        const condition = name  ? {name: {$regex: name, $options: "i"}, isDeleted: {$ne: true}} : {isDeleted: {$ne: true}};
         let query = Product.find(condition);
         let response = {status: "success"};
 
@@ -43,13 +43,68 @@ productController.getProducts = async(req, res) => {
         const productList = await query.exec();
 
         response.productList = productList;
-        console.log("getProducts Success");
+        console.log("getProductList Success");
         res.status(200).json(response);
         // res.status(200).json({status: "getProducts Success", productList});
     }catch(err)
     {
-        console.log("getProducts Fail");
-        res.status(400).json({status: "getProducts Fail", error: err.message});
+        console.log("getProductList Fail");
+        res.status(400).json({status: "getProductList Fail", error: err.message});
+    }
+}
+
+productController.getProductDetail = async(req, res) => {
+    try
+    {
+        const productId = req.params.id;
+        const product = await Product.findById(productId);
+
+        if(!product)
+            throw new Error("item doesn't exist");
+
+        console.log("getProductDetail Success");
+        res.status(200).json({status: "getProductDetail Success", product}); 
+    }catch(err)
+    {
+        console.log("getProductDetail Fail");
+        res.status(400).json({status: "getProductDetail Fail", error: err.message}); 
+    }
+}
+
+productController.updateProduct = async(req, res) => {
+    try
+    {
+        const productId = req.params.id;
+        const {sku, name, size, image, price, description, category, stock, status} = req.body;
+        const product = await Product.findByIdAndUpdate({_id: productId}, {sku, name, size, image, price, description, category, stock, status}, {new: true});
+
+        if(!product)
+            throw new Error("item doesn't exist");
+
+        console.log("updateProduct Success");
+        res.status(200).json({status: "updateProduct Success", product}); 
+    }catch(err)
+    {
+        console.log("updateProduct Fail");
+        res.status(400).json({status: "updateProduct Fail", error: err.message}); 
+    }
+}
+
+productController.deleteProduct = async(req, res) => {
+    try
+    {
+        const productId = req.params.id;
+        const product = await Product.findByIdAndUpdate({_id: productId}, {isDeleted: true});
+
+        if(!product)
+            throw new Error("item doesn't exitst");
+
+        console.log("deleteProduct Success");
+        res.status(200).json({status: "deleteProduct Success", product}); 
+    }catch(err)
+    {
+        console.log("deleteProduct Fail");
+        res.status(200).json({status: "deleteProduct Fail", error: err.message}); 
     }
 }
 

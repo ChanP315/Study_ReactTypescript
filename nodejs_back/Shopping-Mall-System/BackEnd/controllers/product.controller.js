@@ -1,7 +1,7 @@
 import Product from './model/Product.js'
 
 const PAGE_SIZE = 5;
-const productController = {}
+const productController = {};
 
 productController.createProduct = async(req, res) => {
     try
@@ -18,7 +18,7 @@ productController.createProduct = async(req, res) => {
         console.log("createProduct Fail");
         res.status(400).json({status: "createProduct Fail", error: err.message});
     }
-}
+};
 
 productController.getProductList = async(req, res) => {
     try
@@ -51,7 +51,7 @@ productController.getProductList = async(req, res) => {
         console.log("getProductList Fail");
         res.status(400).json({status: "getProductList Fail", error: err.message});
     }
-}
+};
 
 productController.getProductDetail = async(req, res) => {
     try
@@ -69,7 +69,7 @@ productController.getProductDetail = async(req, res) => {
         console.log("getProductDetail Fail");
         res.status(400).json({status: "getProductDetail Fail", error: err.message}); 
     }
-}
+};
 
 productController.updateProduct = async(req, res) => {
     try
@@ -88,7 +88,7 @@ productController.updateProduct = async(req, res) => {
         console.log("updateProduct Fail");
         res.status(400).json({status: "updateProduct Fail", error: err.message}); 
     }
-}
+};
 
 productController.deleteProduct = async(req, res) => {
     try
@@ -106,6 +106,61 @@ productController.deleteProduct = async(req, res) => {
         console.log("deleteProduct Fail");
         res.status(200).json({status: "deleteProduct Fail", error: err.message}); 
     }
-}
+};
+
+
+
+
+
+productController.checkStock = async(item) => {
+    try
+    {
+        // 내가 사려는 아이템 재고 정보 들고오기.
+        const product = await Product.findById(item.productId);
+
+        // 내가 사려는 아이템 qty, 재고 비교
+        if(product.stock[item.size] < item.qty)
+        {
+            // 재고가 불충분하면 불충분 메시지와 함께 데이터 반환
+            return {isVerify: false, message: `${product.name}의 ${item.size.toUpperCase()}재고가 부족합니다.`};
+        }
+    
+        // 충분하다면, 재고에서 - qty 성공
+        const newStock = {...product.stock};
+        newStock[item.size] -= item.qty;
+        product.stock = newStock;
+
+        await product.save();
+
+        return {isVerify: true};
+    }catch(err)
+    {
+        console.log("checkStock Error! Msg: ", err.message);
+    }
+};
+
+productController.checkItemListStock = async(itemList) => {
+    try
+    {
+        const insufficientStockItems = [] // 재고가 불충분한 아이템을 저장할 예정.
+
+        //재고 확인 로직 *** 여러개의 비동기 작업을 한번에 할때 사용하는 Promise.all().
+        await Promise.all(
+            itemList.map(async(item)=> {
+                const stockCheck = await productController.checkStock(item);
+                if(!stockCheck.isVerify)
+                {
+                    insufficientStockItems.push({item, message: stockCheck.message});
+                }
+                return stockCheck;
+            })
+        );
+
+        return insufficientStockItems;
+    }catch(err)
+    {
+        console.log("checkItemListStock Error! Msg: ", err.message);
+    }
+};
 
 export default productController;

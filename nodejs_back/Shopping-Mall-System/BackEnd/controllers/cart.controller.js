@@ -1,5 +1,4 @@
 import Cart from '../controllers/model/Cart.js';
-import Product from './model/Product.js';
 
 const cartController = {};
 

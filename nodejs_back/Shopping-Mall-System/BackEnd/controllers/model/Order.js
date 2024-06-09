@@ -1,21 +1,22 @@
 import mongoose from "mongoose";
 
-import User from './User';
-import Product from "./Product";
+import User from './User.js';
+import Product from "./Product.js";
 
 const Schema = mongoose.Schema;
 
 const orderSchema = Schema({
-    shipTo: { type: String, required: true },
-    contact: { type: String, required: true },
-    totalPrice: { type: Number, required: true },
     userId: { type: mongoose.ObjectId, ref: User },
-    status: { type: String,  default: "active", },
+    status: { type: String,  default: "preparing" },
+    totalPrice: { type: Number, required: true, default: 0 },
+    shipTo: { type: Object, required: true },
+    contact: { type: Object, required: true },
+    orderNum: {type: String },
     items: [{
         productId: { type: mongoose.ObjectId, ref: Product},
+        price: { type: Number, required: true, default: 0 },
+        qty: { type: Number, required: true, default: 1 },
         size: { type: String, required: true},
-        qty: { type: Number, default: 1, required: true},
-        price: { tpye: Number, default: 0, required: true},
     }],
 },{timestamps: true});
 

@@ -9,12 +9,8 @@ cartController.getCartItemList = async(req, res) => {
         const {userId} = req;
         const cart = await Cart.findOne({userId})
             .populate({path: 'items', populate: "productId", model: "Product"});
-        console.log(cart);
-        
         if(!cart)
             throw new Error("유저의 카트 정보가 없습니다.");
-
-        // const ItemList = await Product.findOne({cart.items.});
         
         console.log("getCartItemList Success");
         res.status(200).json({status: "getCartItemList Success", cart, cartItemQty: cart.items.length});
@@ -73,6 +69,47 @@ cartController.addItemToCart = async(req, res) => {
     {
         console.log("addItemToCart Fail");
         res.status(400).json({status: "addItemToCart Fail", error: err.message});
+    }
+};
+
+cartController.updateItemQty = async(req, res, next) => {
+    try
+    {
+        const {userId} = req;
+        const {cartInItemId, itemQty} = req.body;
+
+        const updateCheck = await Cart.updateOne({userId, 'items._id': cartInItemId}, {$set: {"items.$.qty": itemQty}}); //TODO
+        if(!updateCheck)
+            throw new Error("아이템 수량 변경에 실패하였습니다.");
+
+        console.log("updateItemQty Success");
+        next();
+        // res.status(200).json({status: "updateItemQty Success"});
+    }catch(err)
+    {
+        console.log("updateItemQty Fail");
+        res.status(400).json({status: "updateItemQty Fail", error: err.message});
+    }
+}
+
+cartController.deleteCartItem = async(req, res, next) => {
+    try
+    {
+        const {userId} = req;
+        const {cartInItemId} = req.body;
+        
+        //{$pull: {items: {cartInItemId}}} 하지말고 items값에 확실하게 _id라는 것을 아래와 같이 지칭해줘야함.
+        const updateCheck = await Cart.updateOne({userId}, {$pull: {items: {_id: cartInItemId}}});
+        if(!updateCheck)
+            throw new Error("카트에서 아이템 삭제를 실패하였습니다.");
+
+        console.log("deleteCartItem Success");
+        next();
+        // res.status(200).json({status: "deleteCartItem Success", cart});
+    }catch(err)
+    {
+        console.log("deleteCartItem Fail");
+        res.status(400).json({status: "deleteCartItem Fail", error: err.message});
     }
 };
 

@@ -1,7 +1,9 @@
 npm install express mongoose dotenv body-parser cors jsonwebtoken bcryptjs nodemon
 
 cart.controller.js에서
-    디비에서 외래키 참조하여 데이터 가져오는 populate 사용.
+    1. 디비에서 외래키 참조하여 데이터 가져오는 populate 사용.
+    2. //{$pull: {items: {cartInItemId}}} 하지말고 items값에 확실하게 _id라는 것을 아래와 같이 지칭해줘야함.
+        const cart = await Cart.updateOne({userId}, {$pull: {items: {_id: cartInItemId}}});
 
 배포시에 반드시
     1. package.json : "scripts" 에 ["start": "node app.js"] 추가하기
@@ -22,6 +24,7 @@ BackEnd.zip --version descript -배포 성공한 버전만 기재
     v1.5.0: 쇼핑몰 만들기 16~17
     v1.6.0: 쇼핑몰 만들기 18~19 과제까지 완료
     v1.7.0: 쇼핑몰 만들기 20~21 3필수, 3선택 과제 중 3필수 과제까지 완료
+    v1.8.0: 쇼핑몰 만들기 22~23 과제까지 완료
 =======================================================================================================
 16 상품 검색하기
 regex란?

@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 import User from './User.js';
 import Product from "./Product.js";
+import Cart from './Cart.js';
 
 const Schema = mongoose.Schema;
 
@@ -29,6 +30,13 @@ orderSchema.methods.toJSON = function () {
 
     return obj;
 }
+
+orderSchema.post("save", async function () {
+    // 오더를 완료했을 시에 카트를 비워주는 작업.
+    const cart = await Cart.findOne({userId: this.userId});
+    cart.items = [];
+    cart.save();
+})
 
 
 

@@ -23,10 +23,32 @@ productController.createProduct = async(req, res) => {
 productController.getProductList = async(req, res) => {
     try
     {
-        const {page, name} = req.query;
+        const {page, category, name, priceMin, priceMax, soldOut} = req.query;
+        console.log(page, category, name, priceMin, priceMax, soldOut);
         //const products = await Product.find({name: {$regex: name, $options:"i"}});
-        const condition = name  ? {name: {$regex: name, $options: "i"}, isDeleted: {$ne: true}} : {isDeleted: {$ne: true}};
-        let query = Product.find(condition);
+        // const condition = name  ? 
+        //     {name: {$regex: name, $options: "i"}, isDeleted: {$ne: true}}
+        //     :
+        //     {isDeleted: {$ne: true}};
+        const condition = {isDeleted: {$ne: true}};
+        if(category)
+            condition.category = category;
+        if(name)
+            condition.name = {$regex: name, $options: "i"};
+        if(priceMin || priceMax)
+            condition.price = {$gte: priceMin? priceMin*10000 : 0, $lte: priceMax? priceMax*10000 : 0};
+        
+        const soldOutCond = soldOut ? {
+            $or: [
+            {"stock.xs": {$gte : 1}},
+            {"stock.s": {$gte : 1}},
+            {"stock.m": {$gte : 1}},
+            {"stock.l": {$gte : 1}},
+            {"stock.xl": {$gte : 1}},
+        ]} : {};
+        
+        console.log({...condition, ...soldOutCond});
+        let query = Product.find({...condition, ...soldOutCond});
         let response = {status: "success"};
 
         if(page)
